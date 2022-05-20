@@ -1,0 +1,30 @@
+.container {
+  height: 100vh;
+  .container_content {
+    height: (100vh - 140px);
+  }
+  .myContent {
+    padding: 20px;
+    background-color: #fff;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      /*滚动条整体样式*/
+      width: 10px;
+      height: 100%;
+      background: #fff;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      /*滚动条里面轨道*/
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      background: #EDEDED;
+    }
+    &::-webkit-scrollbar-thumb {
+      /*滚动条里面小方块*/
+      border-radius: 10px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background: #535353;
+    }
+  }
+}
