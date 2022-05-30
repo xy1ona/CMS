@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, Outlet, useLocation} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import MyHeader from "components/MyHeader";
 import './App.less'
 import {Dispatch} from 'redux'
@@ -32,24 +32,35 @@ function App(props: IProps) {
     // }
     // 侧边栏当前项的值
     const[asideKey, setAsideKey] = useState('0')
+    const[bread, setBreak] = useState('')
     const location = useLocation()
+    const navigate = useNavigate()
+
     // 监听路由变化，改变侧边栏当前项
     useEffect(()=> {
+        if(location.pathname === '/') {
+            navigate('/list')
+        }
         switch (location.pathname) {
             case '/list':
                 setAsideKey('1')
+                setBreak('查看文章列表')
                 break;
             case '/edit':
                 setAsideKey('2')
+                setBreak('文章编辑')
                 break;
             case '/means':
                 setAsideKey('3')
+                setBreak('修改资料')
                 break;
             case '/namelist':
                 setAsideKey('4-1')
+                setBreak('小编名单')
                 break;
             default:
                 setAsideKey('0')
+                setBreak('')
                 break;
         }
         if(location.pathname.includes('edit')) {
@@ -85,9 +96,8 @@ function App(props: IProps) {
                                 margin: '16px 0',
                             }}
                         >
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
+                            <Breadcrumb.Item><Link to={'/'}>首页</Link></Breadcrumb.Item>
+                            <Breadcrumb.Item>{bread}</Breadcrumb.Item>
                         </Breadcrumb>
                         <Content className="myContent">
                             <Outlet />
