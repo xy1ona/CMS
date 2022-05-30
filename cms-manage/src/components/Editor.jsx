@@ -5,7 +5,7 @@ import {useLocation, useParams} from "react-router-dom";
 import {ArrowLeftOutlined} from '@ant-design/icons';
 import moment from "moment";
 import MyModal from "./MyModal";
-import {GetArticleDyIdApi, EditArticleApi} from 'request/api'
+import {GetArticleDyIdApi, EditArticleApi, AddArticleApi} from 'request/api'
 
 let editor = null
 
@@ -54,13 +54,25 @@ const Editor = () => {
     // 模态框点击提交请求
     const submitArticle = (values)=> {
         console.log(values)
-        EditArticleApi({
-            id: id,
-            content: content,
-            ...values
-        }).then(res=> {
-            message.success(res.msg)
-        })
+        // 有id编辑文章
+        if(id) {
+            EditArticleApi({
+                id: id,
+                content: content,
+                ...values
+            }).then(res=> {
+                message.success(res.msg)
+            })
+        }else {
+            // 无id添加文章
+            AddArticleApi({
+                content: content,
+                ...values
+            }).then(res=> {
+                message.success(res.msg)
+                setShowModal(false)
+            })
+        }
     }
 
     return (

@@ -26,6 +26,12 @@ router.post('/', async ctx=> {
     if(result[0].editable === 1) {
         // 有编辑权限
         let {id,title,subTitle,content} = ctx.request.body
+
+        if(!title || !content) {
+            ctx.body= returnMsg(1, "参数错误" )
+            return;
+        }
+
         // 查询数据库是否有这篇文章
         const sql1 = `SELECT * FROM article WHERE id='${id}'`
         const result1 = await queryFn(sql1)

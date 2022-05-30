@@ -21,15 +21,19 @@ interface IRegisterParams1 {
 // 修改用户信息
 export const ChangeUserInfoApi = (params: IRegisterParams1) => request.post('/info', params)
 
+interface IGetArticleListApi {
+    current: number;
+    counts: number
+}
 // 获取文章列表
-export const GetArticleListApi = () => request.get('/article/list')
+export const GetArticleListApi = (params: IGetArticleListApi) => request.post('/article/list', params)
 
 // 根据id获取文章
 export const GetArticleDyIdApi = (id: number) => request.get(`/article/info/${id}`)
 
 // 文章编辑
 interface IEditArticleParams {
-    id: number;
+    id?: number;
     title: string;
     subTitle?: string;
     content: string;
@@ -39,3 +43,5 @@ export const EditArticleApi = (params: IEditArticleParams) => request.post('/art
 // 文章删除
 export const DeleteArticleApi = (params: { id: number }) => request.post('/article/delete', params)
 
+// 文章添加
+export const AddArticleApi = (params: IEditArticleParams) => request.post('/article/add', params)
