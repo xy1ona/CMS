@@ -45,3 +45,9 @@ export const DeleteArticleApi = (params: { id: number }) => request.post('/artic
 
 // 文章添加
 export const AddArticleApi = (params: IEditArticleParams) => request.post('/article/add', params)
+
+// 获取小编名单
+export const EditorApi = () => request.get(`/nameList`)
+
+// 修改小编名单
+export const ChangeEditorApi = (params: {id: number, open: number}) => request.post(`/nameList`, params)
