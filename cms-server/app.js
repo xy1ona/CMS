@@ -39,7 +39,13 @@ app.use(async (ctx, next)=> {
 })
 
 // 允许跨域，cors中间件一定要写在路由之前
-app.use(cors());
+app.use(cors({
+    origin: (ctx)=> {
+        if (ctx.url === '/manage/upload') { // 允许图片跨域
+            return "*"
+        }
+    }
+}));
 
 // 读取静态资源中间件一定要写在路由之前
 // 在页面中读取404.png - http://127.0.0.1:9000/images/404.png

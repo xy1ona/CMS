@@ -1,4 +1,5 @@
-# Koa2 学习
+## 介绍
+### CMS后端服务 Koa2+MySQL
 
 ## 项目初始化
 ```
@@ -14,3 +15,4 @@ npm install
 ```
 npm start
 ```
+
